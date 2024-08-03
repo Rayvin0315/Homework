@@ -1,0 +1,39 @@
+﻿<Window x:Class="CalculatorApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CalculatorApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Content="7" HorizontalAlignment="Left" Height="58" Margin="24,127,0,0" VerticalAlignment="Top" Width="91" Click="OnNumberClick"/>
+        <Button Content="8" HorizontalAlignment="Left" Height="58" Margin="153,127,0,0" VerticalAlignment="Top" Width="91" Click="OnNumberClick"/>
+        <Button Content="9" HorizontalAlignment="Left" Height="58" Margin="280,127,0,0" VerticalAlignment="Top" Width="91" Click="OnNumberClick"/>
+        <Button Content="4" HorizontalAlignment="Left" Height="58" Margin="24,210,0,0" VerticalAlignment="Top" Width="91" Click="OnNumberClick"/>
+        <Button Content="5" HorizontalAlignment="Left" Height="58" Margin="153,210,0,0" VerticalAlignment="Top" Width="91" Click="OnNumberClick"/>
+        <Button Content="6" HorizontalAlignment="Left" Height="58" Margin="280,210,0,0" VerticalAlignment="Top" Width="91" Click="OnNumberClick"/>
+        <Button Content="1" HorizontalAlignment="Left" Height="58" Margin="24,284,0,0" VerticalAlignment="Top" Width="91" Click="OnNumberClick"/>
+        <Button Content="2" HorizontalAlignment="Left" Height="58" Margin="153,284,0,0" VerticalAlignment="Top" Width="91" Click="OnNumberClick"/>
+        <Button Content="3" HorizontalAlignment="Left" Height="58" Margin="280,284,0,0" VerticalAlignment="Top" Width="91" Click="OnNumberClick"/>
+        <Button Content="0" HorizontalAlignment="Left" Height="58" Margin="24,367,0,0" VerticalAlignment="Top" Width="91" Click="OnNumberClick"/>
+        <Button Content="C" HorizontalAlignment="Left" Height="58" Margin="153,367,0,0" VerticalAlignment="Top" Width="91" Click="OnClearClick"/>
+        <Button Content="=" HorizontalAlignment="Left" Height="58" Margin="280,367,0,0" VerticalAlignment="Top" Width="91" Click="OnEqualClick"/>
+        <TextBox x:Name="Display" HorizontalAlignment="Left" Height="63" Margin="24,38,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="477"/>
+        <TextBox x:Name="PreorderDisplay" HorizontalAlignment="Left" Height="58" Margin="578,127,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="187"/>
+        <TextBox x:Name="PostorderDisplay" HorizontalAlignment="Left" Height="58" Margin="578,210,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="187"/>
+        <TextBox x:Name="DecimalDisplay" HorizontalAlignment="Left" Height="58" Margin="578,284,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="187"/>
+        <TextBox x:Name="BinaryDispaly" HorizontalAlignment="Left" Height="58" Margin="578,367,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="187"/>
+        <Label Content="Preorder" HorizontalAlignment="Left" Margin="513,143,0,0" VerticalAlignment="Top" Width="96"/>
+        <Label Content="Postorder" HorizontalAlignment="Left" Margin="513,226,0,0" VerticalAlignment="Top"/>
+        <Label Content="Decimal" HorizontalAlignment="Left" Margin="513,296,0,0" VerticalAlignment="Top" Width="96"/>
+        <Label Content="Binary" HorizontalAlignment="Left" Margin="513,383,0,0" VerticalAlignment="Top" Width="79"/>
+        <Button Content="insert" HorizontalAlignment="Left" Height="45" Margin="578,46,0,0" VerticalAlignment="Top" Width="82" Click="OnInsertClick"/>
+        <Button Content="query" HorizontalAlignment="Left" Height="45" Margin="681,46,0,0" VerticalAlignment="Top" Width="84" Click="OnQueryClick"/>
+        <Button Content="+" HorizontalAlignment="Left" Height="58" Margin="410,127,0,0" VerticalAlignment="Top" Width="91" Click="OnOperatorClick"/>
+        <Button Content="-" HorizontalAlignment="Left" Height="58" Margin="410,210,0,0" VerticalAlignment="Top" Width="91" Click="OnOperatorClick"/>
+        <Button Content="*" HorizontalAlignment="Left" Height="58" Margin="410,284,0,0" VerticalAlignment="Top" Width="91" Click="OnOperatorClick"/>
+        <Button Content="/" HorizontalAlignment="Left" Height="58" Margin="410,367,0,0" VerticalAlignment="Top" Width="91" Click="OnOperatorClick"/>
+
+    </Grid>
+</Window>
