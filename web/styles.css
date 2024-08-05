@@ -1,0 +1,326 @@
+/* 通用樣式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    box-sizing: border-box;
+}
+
+/* 容器樣式 */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* 頁眉樣式 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #a5d6a7; /* 柔和的綠色 */
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.header-button {
+    background-color: #a5d6a7;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.header-button:hover {
+    background-color: #81c784;
+}
+
+.dashboard-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header h1 {
+    margin: 0;
+}
+
+.logout-button {
+    background-color: #e53935;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.logout-button:hover {
+    background-color: #c62828;
+}
+
+/* 主體內容區域 */
+.dashboard-content {
+    display: flex;
+    flex: 1;
+}
+
+/* 側邊欄樣式 */
+.dashboard-sidebar {
+    background-color: #ffffff;
+    width: 250px;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dashboard-sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-link:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* 主要內容區域樣式 */
+.dashboard-main {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-main h2 {
+    margin-top: 0;
+}
+
+/* 按鈕樣式 */
+.button {
+    background-color: #a5d6a7;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #81c784;
+}
+
+/* 表單樣式 */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #555;
+}
+
+form input[type="email"],
+form input[type="text"],
+form input[type="password"],
+form input[type="color"],
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+form input[type="submit"] {
+    background-color: #a5d6a7;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+form input[type="submit"]:hover {
+    background-color: #81c784;
+}
+
+/* 表格樣式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table thead {
+    background-color: #dcedc8; /* 淺綠色背景 */
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid #c8e6c9; /* 淺綠色邊框 */
+    text-align: left;
+}
+
+table th {
+    background-color: #a5d6a7; /* 稍深的綠色 */
+    color: #fff;
+}
+
+table tr:nth-child(even) {
+    background-color: #f1f8e9; /* 淺綠色條紋 */
+}
+
+table td {
+    background-color: #ffffff; /* 白色背景 */
+}
+
+/* 成功消息 */
+.success-message {
+    color: #388e3c;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+/* 錯誤消息 */
+.error-message {
+    color: #d32f2f; /* 紅色，用於顯示錯誤 */
+    font-size: 18px;
+    margin-top: 20px;
+}
+/* 響應式設計 */
+
+/* 平板和小型桌面 */
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .dashboard-sidebar {
+        display: none; /* 隱藏側邊欄 */
+    }
+
+    .dashboard-main {
+        width: 100%;
+    }
+
+    /* 表格樣式 */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+}
+
+/* 手機 */
+@media (max-width: 480px) {
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        position: relative;
+    }
+
+    .logout-button {
+        margin-top: 10px;
+    }
+
+    /* 按鈕樣式 */
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #fff;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .dashboard-sidebar {
+        display: block; /* 顯示側邊欄 */
+        width: 100%;
+        padding: 10px;
+        box-shadow: none;
+        position: fixed;
+        top: 0;
+        left: 0; /* 顯示側邊欄 */
+        height: 100%;
+        overflow-y: auto;
+        background-color: #ffffff;
+        transition: transform 0.3s ease;
+        transform: translateX(-100%); /* 初始隱藏 */
+    }
+
+    .dashboard-sidebar.active {
+        transform: translateX(0); /* 顯示側邊欄 */
+    }
+
+    .sidebar-link {
+        padding: 8px;
+        display: block;
+    }
+
+    .dashboard-main {
+        padding: 10px;
+        margin-left: 0; /* 調整主內容區域 */
+    }
+
+    table th, table td {
+        padding: 8px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
