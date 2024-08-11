@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Client Name Input -->
+    <EditText
+        android:id="@+id/etClientName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your Name"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Server IP Input -->
+    <EditText
+        android:id="@+id/etServerIp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Server IP"
+        android:inputType="textUri"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Server Port Input -->
+    <EditText
+        android:id="@+id/etServerPort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Server Port"
+        android:inputType="number"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Connect Button -->
+    <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Connect to Server"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Disconnect Button -->
+    <Button
+        android:id="@+id/btnDisconnect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disconnect from Server"
+        android:enabled="false"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Message Input -->
+    <EditText
+        android:id="@+id/etMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter message"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Send Button -->
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send Message"
+        android:enabled="false"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Chat Log Display -->
+    <TextView
+        android:id="@+id/tvChat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#E0E0E0"
+        android:padding="8dp"
+        android:text=""
+        android:scrollbars="vertical" />
+
+</LinearLayout>
+
+
+
