@@ -1,7 +1,7 @@
 // Speech recognition from microphone.
 public static async Task RecognitionWithMicrophoneAsync()
 {
-    var config = SpeechConfig.FromSubscription("26ecea66dc6e4ea596222707260de538", "eastasia");
+    var config = SpeechConfig.FromSubscription("", "");
 
     using (var recognizer = new SpeechRecognizer(config))
     {
