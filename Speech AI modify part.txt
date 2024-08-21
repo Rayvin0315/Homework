@@ -54,7 +54,7 @@ public static async Task RecognitionWithMicrophoneAsync()
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         public static async Task SynthesisToSpeakerAsync()
         {
-            var config = SpeechConfig.FromSubscription("26ecea66dc6e4ea596222707260de538", "eastasia");
+            var config = SpeechConfig.FromSubscription("", "");
 
             using (var synthesizer = new SpeechSynthesizer(config))
             {
@@ -94,7 +94,7 @@ public static async Task RecognitionWithMicrophoneAsync()
         // Method to speak text using synthesis.
         public static async Task SpeakTextAsync(string text)
         {
-            var config = SpeechConfig.FromSubscription("26ecea66dc6e4ea596222707260de538", "eastasia");
+            var config = SpeechConfig.FromSubscription("", "");
             using (var synthesizer = new SpeechSynthesizer(config))
             {
                 using (var result = await synthesizer.SpeakTextAsync(text))
