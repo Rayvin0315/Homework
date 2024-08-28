@@ -1,0 +1,65 @@
+ALTER   PROCEDURE [dbo].[MA_calculator]
+    @start_date DATE,
+    @end_date DATE,
+    @company VARCHAR(10)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Declare variables
+    DECLARE @current_date DATE;
+
+    -- Loop through each date in the range
+    SET @current_date = @start_date;
+    WHILE @current_date <= @end_date
+    BEGIN
+        -- Variables to hold moving averages
+        DECLARE @MA5 REAL, @MA10 REAL, @MA20 REAL, @MA60 REAL, @MA120 REAL, @MA240 REAL;
+
+        -- Calculate MA5
+        SELECT @MA5 = AVG([c])
+        FROM stock_data
+        WHERE date IN (SELECT date FROM find_date(@current_date, 5, 1, 1)) AND stock_code = @company;
+
+        -- Calculate MA10
+        SELECT @MA10 = AVG([c])
+        FROM stock_data
+        WHERE date IN (SELECT date FROM find_date(@current_date, 10, 1, 1)) AND stock_code = @company;
+
+        -- Calculate MA20
+        SELECT @MA20 = AVG([c])
+        FROM stock_data
+        WHERE date IN (SELECT date FROM find_date(@current_date, 20, 1, 1)) AND stock_code = @company;
+
+        -- Calculate MA60
+        SELECT @MA60 = AVG([c])
+        FROM stock_data
+        WHERE date IN (SELECT date FROM find_date(@current_date, 60, 1, 1)) AND stock_code = @company;
+
+        -- Calculate MA120
+        SELECT @MA120 = AVG([c])
+        FROM stock_data
+        WHERE date IN (SELECT date FROM find_date(@current_date, 120, 1, 1)) AND stock_code = @company;
+
+        -- Calculate MA240
+        SELECT @MA240 = AVG([c])
+        FROM stock_data
+        WHERE date IN (SELECT date FROM find_date(@current_date, 240, 1, 1)) AND stock_code = @company;
+
+        -- Update stock_data with calculated moving averages
+        UPDATE stock_data
+        SET 
+            MA5 = @MA5,
+            MA10 = @MA10,
+            MA20 = @MA20,
+            MA60 = @MA60,
+            MA120 = @MA120,
+            MA240 = @MA240
+        WHERE 
+            date = @current_date
+            AND stock_code = @company;
+
+        -- Move to the next date
+        SET @current_date = DATEADD(DAY, 1, @current_date);
+    END;
+END;

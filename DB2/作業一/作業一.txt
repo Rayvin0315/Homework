@@ -1,0 +1,119 @@
+import calendar
+import pymssql
+from datetime import datetime
+from selenium import webdriver
+from selenium.webdriver.edge.service import Service
+from selenium.webdriver.edge.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+
+# 根據自己的Database來填入資訊
+db_settings = {
+    "host": "127.0.0.1",
+    "user": "",
+    "password": "",
+    "database": "",
+    "charset": "utf8"
+}
+
+# 假日字典，使用圖片中的數據
+holiday_dir = {
+    "20240101": "中華民國開國紀念日",
+    "20240206": "交易所休市（辦理結算交割）",
+    "20240207": "交易所休市（辦理結算交割）",
+    "20240208": "春節除夕前一日調整假日（0217補上班但交易所不交易）",
+    "20240209": "春節除夕",
+    "20240212": "春節春節初三",
+    "20240213": "春節補假(補假0210春節初一)",
+    "20240214": "春節補假(補假0211春節初二)",
+    "20240228": "和平紀念日",
+    "20240404": "兒童節",
+    "20240405": "民族掃墓節",
+    "20240501": "勞動節",
+    "20240610": "端午節",
+    "20240907": "中秋節",
+    "20241010": "國慶日"
+}
+
+# 爬蟲
+def crawler():
+    # Edge瀏覽器設置
+    options = Options()
+    options.add_argument("--headless")  # 執行時不顯示瀏覽器
+    options.add_argument("--disable-notifications")  # 禁止瀏覽器的彈跳通知
+    
+    # 使用 Service 指定 driver 路徑
+    service = Service(EdgeChromiumDriverManager().install())
+    
+    # 初始化 WebDriver
+    driver = webdriver.Edge(service=service, options=options)
+
+    driver.get("https://www.wantgoo.com/global/holiday/twse")
+    try:
+        # 等待頁面元素載入完成
+        WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.XPATH, "//tbody[@id='holidays']//tr//th")))
+        holiday_list = driver.find_elements(By.XPATH, "//tbody[@id='holidays']//tr")
+        
+        for holiday in holiday_list:
+            WebDriverWait(holiday, 10).until(EC.presence_of_all_elements_located((By.TAG_NAME, "th")))
+            WebDriverWait(holiday, 10).until(EC.presence_of_all_elements_located((By.TAG_NAME, "td")))
+            date_str = holiday.find_element(By.TAG_NAME, "th").text.split(" ")[0]
+            explain = holiday.find_element(By.TAG_NAME, "td").text.replace("\"", "")
+            
+            if date_str:
+                date_time_obj = datetime.strptime(date_str, '%Y/%m/%d').strftime('%Y%m%d')
+                # 這裡直接更新假日字典
+                holiday_dir[date_time_obj] = explain
+    except TimeoutException as e:
+        print(e)    
+    finally:
+        driver.quit()
+
+    # 處理日曆插入
+    insert_calendar_data()
+
+def insert_calendar_data():
+    work_count = 0
+    
+    try:
+        conn = pymssql.connect(**db_settings)
+        command = "INSERT INTO [dbo].[calendar] (date, day_of_stock, other) VALUES (%s, %d, %s)"
+        with conn.cursor() as cursor:
+            for month in range(1, 13):
+                for date in range(1, calendar.monthrange(2024, month)[1] + 1):
+                    date_str = f"2024{month:02d}{date:02d}"
+                    weekday = calendar.weekday(2024, month, date)  # 取得星期，星期一為0
+                    
+                    if date_str in holiday_dir:  # 若日期為特殊假日
+                        cursor.execute(command, (date_str, -1, holiday_dir[date_str]))
+                    elif weekday == 5 or weekday == 6:  # 若日期為周末
+                        cursor.execute(command, (date_str, -1, ""))
+                    else:
+                        work_count += 1
+                        cursor.execute(command, (date_str, work_count, ""))
+                    
+                    conn.commit()
+    except Exception as e:
+        print(e)
+    finally:
+        conn.close()
+
+    # 插入年度總工作日數據
+    insert_year_calendar(work_count)
+
+def insert_year_calendar(work_count):
+    try:
+        conn = pymssql.connect(**db_settings)
+        command = "INSERT INTO [dbo].[year_calendar] (year, total_day) VALUES (%d, %d)"
+        with conn.cursor() as cursor:
+            cursor.execute(command, (2024, work_count))
+            conn.commit()
+    except Exception as e:
+        print(e)
+    finally:
+        conn.close()
+
+crawler()
